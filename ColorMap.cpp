@@ -10,7 +10,7 @@
 std::vector<std::string> getMjorColorPairs(const std::string& majorColor, int* pairIndex) {
     const std::array<std::string, 5> minorColors = {"Blue", "Orange", "Green", "Brown", "Slate"};
     std::vector<std::string> colorPairs;
-    for (const auto& minorColor : minorColors) {
+    for (const auto& minorColor : minorColors){
         std::ostringstream colorPairStream;
         colorPairStream << "Index=" << *pairIndex << ", MajorColor=" << majorColor;
         colorPairStream << ", MinorColor=" << minorColor;
@@ -23,10 +23,9 @@ std::vector<std::string> getMjorColorPairs(const std::string& majorColor, int* p
 std::vector<std::string> getColorMap() {
     const std::array<std::string, 5> majorColors = {"White", "Red", "Black", "Yellow", "Violet"};
 
-    
     int pairIndex = 0;
     std::vector<std::string> colorMap;
-    for (const auto& majorColor : majorColors) {
+    for (const auto& majorColor : majorColors){
         std::vector<std::string> colorPairs = getMjorColorPairs(majorColor, &pairIndex);
         colorMap.insert(colorMap.end(), colorPairs.begin(), colorPairs.end());
     }
@@ -36,7 +35,7 @@ std::vector<std::string> getColorMap() {
 // Function to format the color map
 std::string formatColorMap(const std::vector<std::string>& colorMap) {
     std::ostringstream formattedOutput;
-    for (const auto& entry : colorMap) {
+    for (const auto& entry : colorMap){
         formattedOutput << entry << "\n";
     }
     return formattedOutput.str();
