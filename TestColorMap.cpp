@@ -2,7 +2,7 @@
 #include <gtest/gtest.h>
 #include <sstream>
 #include <string>
-#include "colormap.h"
+#include "ColorMap.h"
 
 TEST(ColorMapTest, ColorMapOutput) {
     std::vector<std::string> result = getColorMap();

@@ -1,8 +1,8 @@
 #include <string>
 #include "weatherreport.h"
 
-namespace WeatherSpace {    
-    
+namespace WeatherSpace {
+
     std::string Report(const IWeatherSensor& sensor) {
         int precipitation = sensor.Precipitation();
         // precipitation < 20 is a sunny day
@@ -16,4 +16,4 @@ namespace WeatherSpace {
         }
         return report;
     }
-}
+} // namespace WeatherSpace

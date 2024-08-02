@@ -3,7 +3,7 @@
 
 TEST(SizeTest, SmallSize) {
     EXPECT_EQ(Size(37), 'S');
-    EXPECT_EQ(Size(0), 'S');  // Edge case for Size 'S'
+    EXPECT_EQ(Size(0), 'S');
 }
 
 TEST(SizeTest, MediumSize) {
@@ -14,5 +14,5 @@ TEST(SizeTest, MediumSize) {
 TEST(SizeTest, LargeSize) {
     EXPECT_EQ(Size(42), 'L');
     EXPECT_EQ(Size(43), 'L');
-    EXPECT_EQ(Size(100), 'L'); // Edge case for Size 'L'
+    EXPECT_EQ(Size(100), 'L');
 }
