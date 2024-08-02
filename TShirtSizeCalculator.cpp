@@ -6,12 +6,12 @@ char Size(int cms) {
     const int SMALL_MAX = 37;
     const int MEDIUM_MAX = 41;
 
-    char sizeName = 'L'; // Default to 'L' (Large size)
-    
+    char sizeName = 'L';
+
     if (cms <= SMALL_MAX) {
-        sizeName = 'S'; // Small size
+        sizeName = 'S';
     } else if (cms <= MEDIUM_MAX) {
-        sizeName = 'M'; // Medium size
+        sizeName = 'M';
     }
 
     return sizeName;
