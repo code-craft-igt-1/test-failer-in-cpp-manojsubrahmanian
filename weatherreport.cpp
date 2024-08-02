@@ -16,4 +16,4 @@ namespace WeatherSpace {
         }
         return report;
     }
-} // namespace WeatherSpace
+}  // namespace WeatherSpace
