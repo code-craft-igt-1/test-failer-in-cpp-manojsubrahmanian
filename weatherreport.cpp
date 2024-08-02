@@ -1,5 +1,5 @@
 #include <string>
-#include "weatherreport.h"
+#include "WeatherReport.h"
 
 namespace WeatherSpace {
 
