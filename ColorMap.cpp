@@ -3,8 +3,9 @@
 #include <iostream>
 #include <sstream>
 #include <vector>
-#include "ColorMap.h"
 #include <string>
+
+#include "ColorMap.h"
 
 std::vector<std::string> getMjorColorPairs(const std::string& majorColor, int* pairIndex) {
     const std::array<std::string, 5> minorColors = {"Blue", "Orange", "Green", "Brown", "Slate"};
