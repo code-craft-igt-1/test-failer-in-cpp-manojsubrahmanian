@@ -4,16 +4,17 @@
 #include <sstream>
 #include <vector>
 #include "ColorMap.h"
+#include <string>
 
-std::vector<std::string> getMjorColorPairs(const std::string& majorColor, int& pairIndex) {
+std::vector<std::string> getMjorColorPairs(const std::string& majorColor, int* pairIndex) {
     const std::array<std::string, 5> minorColors = {"Blue", "Orange", "Green", "Brown", "Slate"};
     std::vector<std::string> colorPairs;
     for (const auto& minorColor : minorColors) {
         std::ostringstream colorPairStream;
-        colorPairStream << "Index=" << pairIndex << ", MajorColor=" << majorColor;
+        colorPairStream << "Index=" << *pairIndex << ", MajorColor=" << majorColor;
         colorPairStream << ", MinorColor=" << minorColor;
         colorPairs.push_back(colorPairStream.str());
-        ++pairIndex;
+        (*pairIndex)++;
     }
     return colorPairs;
 }
@@ -25,7 +26,7 @@ std::vector<std::string> getColorMap() {
     int pairIndex = 0;
     std::vector<std::string> colorMap;
     for (const auto& majorColor : majorColors) {
-        std::vector<std::string> colorPairs = getMjorColorPairs(majorColor, pairIndex);
+        std::vector<std::string> colorPairs = getMjorColorPairs(majorColor, &pairIndex);
         colorMap.insert(colorMap.end(), colorPairs.begin(), colorPairs.end());
     }
     return colorMap;
