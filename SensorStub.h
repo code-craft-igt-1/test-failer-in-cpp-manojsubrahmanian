@@ -9,21 +9,33 @@
 #include "IWeatherSensor.h"
 namespace WeatherSpace {    
     class SensorStub : public IWeatherSensor {
-        int Humidity() const override {
-            return 72;
-        }
-
-        int Precipitation() const override {
-            return 70;
-        }
-
-        double TemperatureInC() const override {
-            return 26;
-        }
-
-        int WindSpeedKMPH() const override {
-            return 52;
-        }
+        private:
+            int m_humidity;
+            int m_precipitation;
+            double m_temperatureInC;
+            int m_windSpeedKMPH;
+    
+        public:
+            // Constructor
+            SensorStub(int humidity, int precipitation, double temperatureInC, int windSpeedKMPH)
+                : m_humidity(humidity), m_precipitation(precipitation), m_temperatureInC(temperatureInC), m_windSpeedKMPH(windSpeedKMPH) {}
+    
+            // Overridden methods
+            int Humidity() const override {
+                return m_humidity;
+            }
+    
+            int Precipitation() const override {
+                return m_precipitation;
+            }
+    
+            double TemperatureInC() const override {
+                return m_temperatureInC;
+            }
+    
+            int WindSpeedKMPH() const override {
+                return m_windSpeedKMPH;
+            }
     };
 }
 
