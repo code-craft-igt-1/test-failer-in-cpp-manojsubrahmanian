@@ -8,7 +8,7 @@
 #include "ColorMap.h"
 
 std::vector<std::string> getMjorColorPairs(const std::string& majorColor, int* pairIndex) {
-    const std::array<std::string, 5> minorColors = {"Blue", "Orange", "Green", "Brown", "Slate"};
+    const std::array<std::string, 5> minorColors = {"Blue", "Orange", "Green", "Brown", "Slate1"};
     std::vector<std::string> colorPairs;
     for (const auto& minorColor : minorColors) {
         std::ostringstream colorPairStream;

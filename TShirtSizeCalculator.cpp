@@ -8,9 +8,9 @@ char Size(int cms) {
 
     char sizeName = 'L';
 
-    if (cms <= SMALL_MAX) {
+    if (cms < SMALL_MAX) {
         sizeName = 'S';
-    } else if (cms <= MEDIUM_MAX) {
+    } else if (cms < MEDIUM_MAX) {
         sizeName = 'M';
     }
 
