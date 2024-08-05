@@ -3,7 +3,7 @@
 #define WEATHER_REPORT_H
 
 #include <string>
-#include "iweathersensor.h"
+#include "IWeatherSensor.h"
 
 namespace WeatherSpace {
 	std::string Report(const IWeatherSensor& sensor);

@@ -10,4 +10,4 @@ namespace WeatherSpace {
             virtual int WindSpeedKMPH() const = 0;
     };
 }
-#endif // IWEATHERSENSOR_H
+#endif // IWEATHERSENSOR_H 
