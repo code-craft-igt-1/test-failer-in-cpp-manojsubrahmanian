@@ -2,32 +2,40 @@
 #include "WeatherReport.h"
 #include "SensorStub.h"
 
-const int TEMP_RAINY = 50;
-const int HUMIDITY_RAINY = 70;
-const int PRECIPITATION_RAINY = 20;
-const int WINDSPEED_RAINY = 50;
+const int HUMIDITY_RAINY = 72;
+const int PRECIPITATION_RAINY = 70;
+const int TEMP_RAINY = 26;
+const int WINDSPEED_RAINY = 52;
 
-const int TEMP_HIGH_PRECIP_LOW_WIND = 50;
-const int HUMIDITY_HIGH_PRECIP_LOW_WIND = 70;
-const int PRECIPITATION_HIGH_PRECIP_LOW_WIND = 20;
-const int WINDSPEED_HIGH_PRECIP_LOW_WIND = 40;
+const int HUMIDITY_STORMY = 72;
+const int PRECIPITATION_STORMY = 70;
+const int TEMP_STORMY = 26;
+const int WINDSPEED_STORMY = 52;
 
-const int TEMP_LOW_HUMIDITY = 0;
-const int HUMIDITY_LOW_HUMIDITY = 50;
-const int PRECIPITATION_LOW_HUMIDITY = 20;
-const int WINDSPEED_LOW_HUMIDITY = 50;
+const int HUMIDITY_SUNNY = 72;
+const int PRECIPITATION_SUNNY = 10;
+const int TEMP_SUNNY = 26;
+const int WINDSPEED_SUNNY = 52;
 
-const int TEMP_HIGH_HUMIDITY = 50;
-const int HUMIDITY_HIGH_HUMIDITY = 90;
-const int PRECIPITATION_HIGH_HUMIDITY = 20;
-const int WINDSPEED_HIGH_HUMIDITY = 50;
+// TestSunny
+TEST(WeatherReportTest, TestSunny) {
+    WeatherSpace::SensorStub sensor(
+        HUMIDITY_SUNNY,
+        PRECIPITATION_SUNNY,
+        TEMP_SUNNY,
+        WINDSPEED_SUNNY);
+
+    std::string report = WeatherSpace::Report(sensor);
+    std::cout << report << std::endl;
+    ASSERT_NE(report.find("Sunny"), std::string::npos);
+}
 
 // TestRainy
 TEST(WeatherReportTest, TestRainy) {
     WeatherSpace::SensorStub sensor(
-        TEMP_RAINY,
         HUMIDITY_RAINY,
         PRECIPITATION_RAINY,
+        TEMP_RAINY,
         WINDSPEED_RAINY);
 
     std::string report = WeatherSpace::Report(sensor);
@@ -35,38 +43,20 @@ TEST(WeatherReportTest, TestRainy) {
     ASSERT_NE(report.find("rain"), std::string::npos);
 }
 
-// TestHighPrecipitationAndLowWindspeed
-TEST(WeatherReportTest, TestHighPrecipitationAndLowWindspeed) {
+// TestStormy
+TEST(WeatherReportTest, TestStormy) {
     WeatherSpace::SensorStub sensor(
-        TEMP_HIGH_PRECIP_LOW_WIND,
-        HUMIDITY_HIGH_PRECIP_LOW_WIND,
-        PRECIPITATION_HIGH_PRECIP_LOW_WIND,
-        WINDSPEED_HIGH_PRECIP_LOW_WIND);
+        HUMIDITY_STORMY,
+        PRECIPITATION_STORMY,
+        TEMP_STORMY,
+        WINDSPEED_STORMY);
 
     std::string report = WeatherSpace::Report(sensor);
-    ASSERT_GT(report.length(), 0);
+    std::cout << report << std::endl;
+    ASSERT_NE(report.find("Stormy"), std::string::npos);
 }
 
-// TestLowHumidity
-TEST(WeatherReportTest, TestLowHumidity) {
-    WeatherSpace::SensorStub sensor(
-        TEMP_LOW_HUMIDITY,
-        HUMIDITY_LOW_HUMIDITY,
-        PRECIPITATION_LOW_HUMIDITY,
-        WINDSPEED_LOW_HUMIDITY);
 
-    std::string report = WeatherSpace::Report(sensor);
-    ASSERT_GT(report.length(), 0);
-}
 
-// TestHighHumidity
-TEST(WeatherReportTest, TestHighHumidity) {
-    WeatherSpace::SensorStub sensor(
-        TEMP_HIGH_HUMIDITY,
-        HUMIDITY_HIGH_HUMIDITY,
-        PRECIPITATION_HIGH_HUMIDITY,
-        WINDSPEED_HIGH_HUMIDITY);
 
-    std::string report = WeatherSpace::Report(sensor);
-    ASSERT_GT(report.length(), 0);
-}
+
