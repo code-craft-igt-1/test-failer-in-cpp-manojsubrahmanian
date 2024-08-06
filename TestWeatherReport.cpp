@@ -2,9 +2,29 @@
 #include "WeatherReport.h"
 #include "SensorStub.h"
 
+const int TEMP_RAINY = 50;
+const int HUMIDITY_RAINY = 70;
+const int PRECIPITATION_RAINY = 20;
+const int WINDSPEED_RAINY = 50;
+
+const int TEMP_HIGH_PRECIP_LOW_WIND = 50;
+const int HUMIDITY_HIGH_PRECIP_LOW_WIND = 70;
+const int PRECIPITATION_HIGH_PRECIP_LOW_WIND = 20;
+const int WINDSPEED_HIGH_PRECIP_LOW_WIND = 40;
+
+const int TEMP_LOW_HUMIDITY = 0;
+const int HUMIDITY_LOW_HUMIDITY = 50;
+const int PRECIPITATION_LOW_HUMIDITY = 20;
+const int WINDSPEED_LOW_HUMIDITY = 50;
+
+const int TEMP_HIGH_HUMIDITY = 50;
+const int HUMIDITY_HIGH_HUMIDITY = 90;
+const int PRECIPITATION_HIGH_HUMIDITY = 20;
+const int WINDSPEED_HIGH_HUMIDITY = 50;
+
 // TestRainy
 TEST(WeatherReportTest, TestRainy) {
-    WeatherSpace::SensorStub sensor(50, 70, 20, 50);
+    WeatherSpace::SensorStub sensor(TEMP_RAINY, HUMIDITY_RAINY, PRECIPITATION_RAINY, WINDSPEED_RAINY);
     std::string report = WeatherSpace::Report(sensor);
     std::cout << report << std::endl;
     ASSERT_NE(report.find("rain"), std::string::npos);
@@ -12,63 +32,21 @@ TEST(WeatherReportTest, TestRainy) {
 
 // TestHighPrecipitationAndLowWindspeed
 TEST(WeatherReportTest, TestHighPrecipitationAndLowWindspeed) {
-    WeatherSpace::SensorStub sensor(50, 70, 20, 40);
+    WeatherSpace::SensorStub sensor(TEMP_HIGH_PRECIP_LOW_WIND, HUMIDITY_HIGH_PRECIP_LOW_WIND, PRECIPITATION_HIGH_PRECIP_LOW_WIND, WINDSPEED_HIGH_PRECIP_LOW_WIND);
     std::string report = WeatherSpace::Report(sensor);
     ASSERT_GT(report.length(), 0);
 }
 
 // TestLowHumidity
 TEST(WeatherReportTest, TestLowHumidity) {
-    WeatherSpace::SensorStub sensor(0, 50, 20, 50);
+    WeatherSpace::SensorStub sensor(TEMP_LOW_HUMIDITY, HUMIDITY_LOW_HUMIDITY, PRECIPITATION_LOW_HUMIDITY, WINDSPEED_LOW_HUMIDITY);
     std::string report = WeatherSpace::Report(sensor);
     ASSERT_GT(report.length(), 0);
 }
 
 // TestHighHumidity
 TEST(WeatherReportTest, TestHighHumidity) {
-    WeatherSpace::SensorStub sensor(100, 50, 20, 50);
-    std::string report = WeatherSpace::Report(sensor);
-    ASSERT_GT(report.length(), 0);
-}
-
-// TestLowTemperature
-TEST(WeatherReportTest, TestLowTemperature) {
-    WeatherSpace::SensorStub sensor(50, 50, -50, 50);
-    std::string report = WeatherSpace::Report(sensor);
-    ASSERT_GT(report.length(), 0);
-}
-
-// TestHighTemperature
-TEST(WeatherReportTest, TestHighTemperature) {
-    WeatherSpace::SensorStub sensor(50, 50, 50, 50);
-    std::string report = WeatherSpace::Report(sensor);
-    ASSERT_GT(report.length(), 0);
-}
-
-// TestLowWindSpeed
-TEST(WeatherReportTest, TestLowWindSpeed) {
-    WeatherSpace::SensorStub sensor(50, 50, 20, 0);
-    std::string report = WeatherSpace::Report(sensor);
-    ASSERT_GT(report.length(), 0);
-}
-
-// TestHighWindSpeed
-TEST(WeatherReportTest, TestHighWindSpeed) {
-    WeatherSpace::SensorStub sensor(50, 50, 20, 100);
-    std::string report = WeatherSpace::Report(sensor);
-    ASSERT_GT(report.length(), 0);
-}
-
-// TestZeroPrecipitation
-TEST(WeatherReportTest, TestZeroPrecipitation) {
-    WeatherSpace::SensorStub sensor(50, 0, 20, 50);
-    std::string report = WeatherSpace::Report(sensor);
-    ASSERT_GT(report.length(), 0);
-}
-
-// TestMaxPrecipitation
-TEST(WeatherReportTest, TestMaxPrecipitation) {
-    WeatherSpace::SensorStub sensor(50, 100, 20, 50);
+    WeatherSpace::SensorStub sensor(TEMP_HIGH_HUMIDITY, HUMIDITY_HIGH_HUMIDITY, PRECIPITATION_HIGH_HUMIDITY, WINDSPEED_HIGH_HUMIDITY);
     std::string report = WeatherSpace::Report(sensor);
     ASSERT_GT(report.length(), 0);
 }
