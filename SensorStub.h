@@ -17,7 +17,7 @@ namespace WeatherSpace {
     
         public:
             // Constructor
-            SensorStub(int humidity, int precipitation, double temperatureInC, int windSpeedKMPH)
+            SensorStub(double temperatureInC, int precipitation, int windSpeedKMPH, int humidity)
                 : m_humidity(humidity), m_precipitation(precipitation), m_temperatureInC(temperatureInC), m_windSpeedKMPH(windSpeedKMPH) {}
     
             // Overridden methods

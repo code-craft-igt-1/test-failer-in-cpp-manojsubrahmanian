@@ -1,61 +1,56 @@
+#include <string>
 #include "gtest/gtest.h"
 #include "WeatherReport.h"
 #include "SensorStub.h"
 
-const int HUMIDITY_RAINY = 72;
-const int PRECIPITATION_RAINY = 70;
-const int TEMP_RAINY = 26;
-const int WINDSPEED_RAINY = 52;
-
-const int HUMIDITY_STORMY = 72;
-const int PRECIPITATION_STORMY = 70;
-const int TEMP_STORMY = 26;
-const int WINDSPEED_STORMY = 52;
-
-const int HUMIDITY_SUNNY = 72;
-const int PRECIPITATION_SUNNY = 10;
-const int TEMP_SUNNY = 26;
-const int WINDSPEED_SUNNY = 52;
-
-// TestSunny
-TEST(WeatherReportTest, TestSunny) {
-    WeatherSpace::SensorStub sensor(
-        HUMIDITY_SUNNY,
-        PRECIPITATION_SUNNY,
-        TEMP_SUNNY,
-        WINDSPEED_SUNNY);
-
+// Test case for Sunny day
+TEST(PredictWeatherTest, SunnyDay) {
+    WeatherSpace::SensorStub sensor(25, 0, 5, 50);
     std::string report = WeatherSpace::Report(sensor);
-    std::cout << report << std::endl;
-    ASSERT_NE(report.find("Sunny"), std::string::npos);
+    EXPECT_EQ(report, "Sunny day");
 }
 
-// TestRainy
-TEST(WeatherReportTest, TestRainy) {
-    WeatherSpace::SensorStub sensor(
-        HUMIDITY_RAINY,
-        PRECIPITATION_RAINY,
-        TEMP_RAINY,
-        WINDSPEED_RAINY);
-
+// Test case for Partly cloudy
+TEST(PredictWeatherTest, PartlyCloudy) {
+    WeatherSpace::SensorStub sensor(22, 3, 15, 70);
     std::string report = WeatherSpace::Report(sensor);
-    std::cout << report << std::endl;
-    ASSERT_NE(report.find("rain"), std::string::npos);
+    EXPECT_EQ(report, "Partly cloudy");
 }
 
-// TestStormy
-TEST(WeatherReportTest, TestStormy) {
-    WeatherSpace::SensorStub sensor(
-        HUMIDITY_STORMY,
-        PRECIPITATION_STORMY,
-        TEMP_STORMY,
-        WINDSPEED_STORMY);
-
+// Test case for Alert, Stormy with heavy rain
+TEST(PredictWeatherTest, StormyWithHeavyRain) {
+    WeatherSpace::SensorStub sensor(18, 15, 25, 85);
     std::string report = WeatherSpace::Report(sensor);
-    std::cout << report << std::endl;
-    ASSERT_NE(report.find("Stormy"), std::string::npos);
+    EXPECT_EQ(report, "Alert, Stormy with heavy rain");
 }
 
+// Test case for Unknown weather condition
+TEST(PredictWeatherTest, UnknownWeatherCondition) {
+    WeatherSpace::SensorStub sensor(10, 0, 5, 90);
+    std::string report = WeatherSpace::Report(sensor);
+    EXPECT_EQ(report, "Unknown weather condition");
+}
+
+// Test case for boundary values: high temperature for sunny day
+TEST(PredictWeatherTest, SunnyDayHighTemperature) {
+    WeatherSpace::SensorStub sensor(35, 0, 9, 59);
+    std::string report = WeatherSpace::Report(sensor);
+    EXPECT_EQ(report, "Sunny day");
+}
+
+// Test case for boundary values: low temperature for partly cloudy
+TEST(PredictWeatherTest, PartlyCloudyLowTemperature) {
+    WeatherSpace::SensorStub sensor(15, 4, 19, 65);
+    std::string report = WeatherSpace::Report(sensor);
+    EXPECT_EQ(report, "Partly cloudy");
+}
+
+// Test case for boundary values: high wind speed for stormy
+TEST(PredictWeatherTest, StormyWithHeavyRainHighWindSpeed) {
+    WeatherSpace::SensorStub sensor(28, 12, 30, 90);
+    std::string report = WeatherSpace::Report(sensor);
+    EXPECT_EQ(report, "Alert, Stormy with heavy rain");
+}
 
 
 
