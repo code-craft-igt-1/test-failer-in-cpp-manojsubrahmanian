@@ -1,84 +1,27 @@
-#include <assert.h>
 #include <string>
-#include <iostream>
-
-using std::cout, std::endl, std::string;
+#include "WeatherReport.h"
 
 namespace WeatherSpace {
-class IWeatherSensor {
- public:
-        virtual double TemperatureInC() const = 0;
-        virtual int Precipitation() const = 0;
-        virtual int Humidity() const = 0;
-        virtual int WindSpeedKMPH() const = 0;
-};
 
-/// This is a stub for a weather sensor. For the sake of testing
-/// we create a stub that generates weather data and allows us to
-/// test the other parts of this application in isolation
-/// without needing the actual Sensor during development
+    std::string Report(const IWeatherSensor& sensor) {
+        double temperature = sensor.TemperatureInC();
+        double precipitation = sensor.Precipitation();
+        double windSpeed = sensor.WindSpeedKMPH();
+        double humidity = sensor.Humidity();
+        std::string report;
 
-class SensorStub : public IWeatherSensor {
-    int Humidity() const override {
-        return 72;
-    }
-
-    int Precipitation() const override {
-        return 70;
-    }
-
-    double TemperatureInC() const override {
-        return 26;
-    }
-
-    int WindSpeedKMPH() const override {
-        return 52;
-    }
-};
-
-// This is a function to predict the weather, based on readings
-// from a sensor
-
-string Report(const IWeatherSensor& sensor) {
-    int precipitation = sensor.Precipitation();
-    // precipitation < 20 is a sunny day
-    string report = "Sunny day";
-
-    if (sensor.TemperatureInC() > 25) {
-        if (precipitation >= 20 && precipitation < 60)
+        if (precipitation == 0 && windSpeed < 10 &&
+            temperature >= 20 && temperature <= 35 && humidity < 60) {
+            report = "Sunny day";
+        } else if (precipitation <= 5 && windSpeed < 20 && temperature >= 15
+            && temperature <= 30 && humidity >= 60 && humidity <= 80) {
             report = "Partly cloudy";
-        else if (sensor.WindSpeedKMPH() > 50)
+        } else if (precipitation > 10 && windSpeed >= 20 && temperature <= 30 && humidity > 80) {
             report = "Alert, Stormy with heavy rain";
+        } else {
+            report = "Unknown weather condition";
+        }
+
+        return report;
     }
-    return report;
-}
-
-// Test a rainy day
-
-void TestRainy() {
-    SensorStub sensor;
-    string report = Report(sensor);
-    cout << report << endl;
-    assert(report.find("rain") != string::npos);
-}
-
-// Test another rainy day
-
-void TestHighPrecipitationAndLowWindspeed() {
-    // This instance of stub needs to be different-
-    // to give high precipitation (>60) and low wind-speed (<50)
-    SensorStub sensor;
-
-    // strengthen the assert to expose the bug
-    // (function returns Sunny day, it should predict rain)
-    string report = Report(sensor);
-    assert(report.length() > 0);
-}
 }  // namespace WeatherSpace
-
-int main() {
-    WeatherSpace::TestRainy();
-    WeatherSpace::TestHighPrecipitationAndLowWindspeed();
-    cout << "All is well (maybe)\n";
-    return 0;
-}

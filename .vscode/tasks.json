@@ -1,0 +1,29 @@
+{
+    "tasks": [
+        {
+            "label": "CMake: Build Debug",
+            "type": "shell",
+            "command": "cmake",
+            "args": [
+                "--build",
+                "${workspaceFolder}/build",
+                "--config",
+                "Debug"
+            ],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "problemMatcher": ["$gcc"],
+            "detail": "Generated task by CMake Tools."
+        },
+        {
+            "label": "Run Tests",
+            "type": "shell",
+            "command": "${workspaceFolder}/build/Debug/FalsePositive.exe",
+            "group": "test",
+            "problemMatcher": []
+        }
+    ],
+    "version": "2.0.0"
+}
